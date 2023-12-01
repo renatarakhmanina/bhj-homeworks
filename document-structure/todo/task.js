@@ -1,5 +1,6 @@
 const tasklist = document.querySelector('.tasks__list');
 const input = document.querySelector('.tasks__input');
+const addButton = document.querySelector('.tasks__add');
 
 function createTask(task) {
   tasklist.insertAdjacentHTML('beforeEnd', `<div class='task'><div class='task__title'>${task}</div><a href='#' class='task__remove'>&times;</a></div>`);
@@ -11,12 +12,12 @@ function removeTask(e) {
   }
 }
 
-input.addEventListener('keydown', (e) => {
-  if (e.target.value && e.key === 'Enter') {
-    e.preventDefault();
-    createTask(e.target.value);
-    input.value = '';
+addButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (input.value.trim()) {
+    createTask(input.value);
   }
+  input.value = '';
 });
 
 tasklist.addEventListener('click', removeTask);
